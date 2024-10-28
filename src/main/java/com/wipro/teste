@@ -1,0 +1,107 @@
+Question 06:
+
+A anotação @Component é uma das anotações de estereótipo no Spring Framework, usada para marcar uma classe como um "componente gerenciado" pelo contêiner de Inversão de Controle (IoC) do Spring. Isso significa que o Spring vai automaticamente detectar e registrar essa classe como um bean durante o processo de escaneamento do classpath, permitindo que ela seja injetada e gerenciada pelo contêiner de dependências.
+
+Por que @Component é importante?
+Injeção de Dependência (DI): Com @Component, você habilita o Spring para gerenciar as instâncias das classes anotadas. Isso facilita a injeção de dependência em outras classes sem precisar instanciar manualmente.
+Modularidade e Testabilidade: Ao usar @Component, você deixa o Spring responsável por controlar o ciclo de vida dos objetos, melhorando a modularidade e facilitando a testabilidade, já que é fácil substituir um componente por um mock em um contexto de teste.
+Organização do Código: A anotação ajuda a manter o código bem organizado e desacoplado, seguindo os princípios da Programação Orientada a Objetos e Injeção de Dependência.
+
+Exemplo prático: Acesse o pacote "com.wipro.domain.controller" para visualizar o exemplo.
+
+Question 07
+
+A injeção de dependência é um padrão de design que permite que um objeto receba suas dependências de fontes externas, em vez de criá-las internamente. No Spring, a injeção de dependência é facilitada pelo contêiner de IoC (Inversão de Controle), que gerencia os objetos e suas dependências, permitindo que o código seja mais modular, testável e flexível.
+
+Conceito de Injeção de Dependência
+Em vez de uma classe instanciar suas próprias dependências, o Spring as injeta automaticamente, usando anotações e configuração. Isso promove o desacoplamento entre os componentes, o que facilita a manutenção e o teste do código. A injeção de dependência pode ser feita de três maneiras no Spring:
+
+Injeção por construtor – A dependência é passada para o objeto via construtor.
+Injeção por setter – A dependência é passada através de métodos setters.
+Injeção por campo – Utilizando a anotação @Autowired diretamente no campo da classe.
+Diferenças entre as Anotações @Autowired, @Component e @Service
+Essas anotações desempenham papéis diferentes no Spring Framework e são usadas em conjunto para habilitar a injeção de dependência.
+
+@Autowired
+Marca um campo, construtor ou método setter como um ponto de injeção de dependência.
+Quando usada, o Spring tenta automaticamente injetar uma instância do tipo desejado.
+Pode ser usada em classes que não são necessariamente gerenciadas pelo Spring, como métodos ou construtores dentro de classes com outra função.
+
+@Component
+Marca uma classe como um "bean" gerenciado pelo Spring, ou seja, um objeto que o contêiner Spring gerencia.
+O Spring detecta automaticamente classes anotadas com @Component e as registra como beans.
+É uma anotação genérica e pode ser usada para qualquer tipo de classe que precise ser gerenciada pelo Spring, como classes utilitárias ou helpers.
+
+@Service
+É uma especialização de @Component, destinada especificamente a classes de serviços que contêm lógica de negócio.
+Não adiciona funcionalidade extra em relação a @Component, mas torna o código mais legível ao indicar a função da classe.
+Usar @Service deixa claro que a classe representa uma camada de serviço no design da aplicação, facilitando a organização do código.
+
+Diferenças resumidas
+@Autowired: Injeção de dependência. Especifica onde o Spring deve injetar uma instância de uma dependência.
+@Component: Declara um bean genérico, geralmente usado para classes utilitárias ou que não possuem uma camada específica.
+@Service: Subtipo de @Component, indicando que a classe representa uma camada de serviço e contém lógica de negócios.
+Em resumo, @Autowired é para injeção de dependências, enquanto @Component e @Service são para declarar beans no contêiner Spring, com @Service servindo como uma especialização para a camada de serviço.
+
+
+Question 08
+
+Em Spring Boot, um endpoint REST é criado usando uma classe anotada com @RestController, que define métodos mapeados para lidar com diferentes tipos de requisições HTTP, como GET e POST. Vou exemplificar como definir esses métodos.
+
+Criação da Classe Controller: A primeira etapa é definir uma classe e anotá-la com @RestController, que indica ao Spring que essa classe é um controlador REST.
+
+Definindo o Endpoint GET: Para definir um endpoint que responde a requisições GET, você pode usar a anotação @GetMapping, associando-a a um caminho de URL. Este método geralmente retorna dados para o cliente.
+
+Definindo o Endpoint POST: O endpoint POST é definido com a anotação @PostMapping, também associada a um caminho de URL. Este tipo de endpoint é usado para receber dados de um cliente e, geralmente, criar ou modificar recursos no servidor.
+
+@RequestMapping("/api/users"): Define o caminho base para os endpoints. Neste caso, /api/users.
+@GetMapping: Especifica que o método getAllUsers responde a requisições GET no caminho /api/users.
+@PostMapping: Especifica que o método createUser responde a requisições POST no caminho /api/users.
+@RequestBody: Anota o parâmetro user para que Spring Boot saiba que os dados do usuário serão passados no corpo da requisição POST.
+
+Question 09
+
+O Spring Data JPA é um módulo do Spring que simplifica o acesso e a manipulação de dados em bancos de dados relacionais, utilizando o Java Persistence API (JPA). Ele fornece uma camada de abstração adicional sobre o JPA e o Hibernate (ou outro provedor JPA), permitindo que você trabalhe com dados de maneira declarativa e com menos código.
+
+Como o Spring Data JPA facilita o uso de bancos de dados relacionais
+O Spring Data JPA integra o JPA com o Spring, simplificando o mapeamento entre objetos Java e tabelas no banco de dados. Ele oferece uma camada de repositório para que você possa interagir com o banco de dados sem escrever SQL manualmente. Algumas das funcionalidades oferecidas são:
+
+CRUD automático: Basta definir uma interface para gerenciar entidades específicas, e o Spring Data JPA gera métodos CRUD (save, findById, findAll, delete, etc.).
+Consultas automáticas: A partir de nomes de métodos, como findByEmail ou findByLastName, o Spring Data JPA gera queries SQL automaticamente.
+Paginação e ordenação: Recursos de paginação e ordenação são fornecidos de forma automática com métodos simples.
+Queries customizadas: Permite definir queries específicas usando a anotação @Query com JPQL (Java Persistence Query Language) ou SQL nativo.
+Benefícios de usar CrudRepository e JpaRepository
+O Spring Data JPA oferece várias interfaces para trabalhar com repositórios, sendo as principais:
+
+CrudRepository: Oferece operações CRUD básicas (Create, Read, Update, Delete). Exemplo de métodos:
+save(entity)
+findById(id)
+existsById(id)
+deleteById(id)
+JpaRepository: Extende o CrudRepository com métodos adicionais para operações mais avançadas, como paginação e ordenação:
+findAll(Pageable pageable) para paginação
+findAll(Sort sort) para ordenação
+Usar essas interfaces reduz a quantidade de código boilerplate, pois o Spring gera automaticamente a implementação. Isso permite ao desenvolvedor focar mais na lógica de negócio e menos na escrita de SQL ou na configuração de acesso a dados.
+
+Diferença entre Spring Data JPA e Hibernate
+Embora ambos sejam usados para persistência de dados, Spring Data JPA e Hibernate têm papéis e propósitos diferentes:
+
+Spring Data JPA:
+
+É uma camada de abstração sobre o JPA e não implementa o JPA diretamente. Ele facilita o uso do JPA em aplicações Spring, permitindo a criação rápida de repositórios de dados.
+Oferece recursos avançados para consultas automáticas, repositórios, suporte a paginamento e ordenação, mas depende de um provedor JPA para realizar a persistência real dos dados (como o Hibernate).
+Define uma API específica para repositórios no contexto do Spring, oferecendo uma forma mais simplificada de gerenciar dados.
+Hibernate:
+
+É uma implementação específica do JPA e um provedor de persistência que interage diretamente com o banco de dados.
+Fornece a execução real de queries, mapeamento objeto-relacional (ORM), e faz a tradução entre objetos Java e tabelas de banco de dados.
+Adiciona funcionalidades próprias além das especificações JPA (como caching de segundo nível e filtros dinâmicos), o que permite usar recursos avançados que o JPA sozinho não oferece.
+
+
+Question 10
+
+O Spring Boot usa arquivos de propriedades (application.properties ou application.yml) para configurar o comportamento da aplicação, definir detalhes de conexão com o banco de dados, variáveis de ambiente, configurações de segurança, e muito mais. Esses arquivos são carregados automaticamente durante a inicialização da aplicação, permitindo centralizar e personalizar configurações sem precisar alterar o código-fonte.
+
+
+
+
