@@ -29,13 +29,6 @@ public class UserService {
         System.out.println(environment.getProperty("nome"));
     }
 
-    public void printUserName(Long id) {
-        userRepository.findById(id).ifPresentOrElse(
-                user -> System.out.println("Nome do usuário: " + user.getName()),
-                () -> System.out.println("Usuário não encontrado")
-        );
-    }
-
 
     public User findById(Long id) {
 
